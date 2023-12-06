@@ -7,9 +7,11 @@ import de.siegmar.fastcsv.reader.NamedCsvRow;
 import jdk.nashorn.internal.ir.CallNode;
 import net.minidev.json.JSONUtil;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.ClassUtils;
 
-import java.io.File;
-import java.io.IOException;
+import javax.annotation.Resource;
+import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -22,10 +24,10 @@ public class ReadCSV {
     }
 
     public static ArrayList<HashMap<String, Object>> readFile() throws IOException {
-        String path = "src/main/resources/metadata/metadataExpect.csv";
-        final File file = new File(path);
-        final Path path1 = file.toPath();
-        final CsvReader csvRows = CsvReader.builder().build(path1, Charset.forName("GBK"));
+
+        final InputStream input = ClassUtils.getDefaultClassLoader().getResourceAsStream("metadata/metadataExpect.csv");
+        Reader reader = new InputStreamReader(input, "UTF-8");
+        final CsvReader csvRows = CsvReader.builder().build(reader);
         final ArrayList<HashMap<String, Object>> hashMaps = new ArrayList<>();
         for (CsvRow row : csvRows) {
             final HashMap<String, Object> hashMap = new HashMap<>();

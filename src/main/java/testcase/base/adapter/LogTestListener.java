@@ -11,7 +11,9 @@ public class LogTestListener extends TestListenerAdapter {
     Logger logger = LoggerFactory.getLogger(LogTestListener.class);
     @Override
     public void onTestFailure(ITestResult tr) {
-        logger.error("FFFFFFFFFFFFF");
+
+        logger.error("FFFFFFFFFFFFF"+tr.getThrowable().toString());
+
     }
 
 
