@@ -50,6 +50,10 @@ public class MetadataTest extends AbstractTestNGSpringContextTests {
 
         while (iterator.hasNext()) {
             final HashMap<String, Object> next = iterator.next();
+            System.out.println("odsMetadata.get(\"TABLE_NAME\"): "+odsMetadata.get("TABLE_NAME"));
+            System.out.println("next.get(\"TABLE_NAME\"): "+next.get("TABLE_NAME"));
+            System.out.println("next.get(\"TABLE_NAME\"): "+odsMetadata.get("COLUMN_NAME"));
+            System.out.println("next.get(\"TABLE_NAME\"): "+next.get("COLUMN_NAME"));
             if (odsMetadata.get("TABLE_NAME").equals(next.get("TABLE_NAME")) && odsMetadata.get("COLUMN_NAME").equals(next.get("COLUMN_NAME"))) {
                 logger.info("数据类型对比{},{}",odsMetadata.get("DATA_TYPE").toString(), next.get("DATA_TYPE").toString());
                 Assert.assertEquals(odsMetadata.get("DATA_TYPE").toString(), next.get("DATA_TYPE").toString(), "数据类型对比");
